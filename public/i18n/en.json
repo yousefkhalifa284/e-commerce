@@ -1,0 +1,25 @@
+{
+  "nav": {
+    "home": "Home",
+    "products": "Products",
+    "wishlist": "Wishlist",
+    "cart": "Cart",
+    "categories": "Categories",
+    "brand": "Brand",
+    "onlineMarket": "Online Market",
+    "freshCart": "FreshCart",
+    "logIn": "Log In",
+    "signUp": "Sign Up",
+    "logout": "Logout",
+    "signOut": "Sign Out",
+    "emptyCart": "No items in cart"
+  },
+  "pages": {
+    "home": "Home",
+    "products": "Products",
+    "wishlist": "Wishlist",
+    "cart": "Cart",
+    "categories": "Categories",
+    "brand": "Brand"
+  }
+}

@@ -1,0 +1,63 @@
+<div class="my-container min-h-screen py-10">
+  <div class="max-w-md mx-auto mb-10 relative group px-4">
+    <div class="absolute inset-y-0 left-4 pl-4 flex items-center pointer-events-none">
+      <i class="fa-solid fa-magnifying-glass text-gray-400 group-focus-within:text-green-500 transition-colors"></i>
+    </div>
+    <input
+      type="text"
+      placeholder="Search for products by name..."
+      [(ngModel)]="text"
+      class="w-full pl-12 pr-4 py-3.5 border-2 border-gray-100 rounded-2xl outline-none focus:border-green-500 focus:ring-4 focus:ring-green-50 transition-all shadow-sm font-medium"
+    >
+  </div>
+
+  @if (isLoading()) {
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 p-4">
+      @for (i of [1,2,3,4,5,6,7,8]; track $index) {
+        <div class="bg-white rounded-[2rem] p-5 border border-gray-100 shadow-sm animate-pulse">
+          <div class="w-full h-52 bg-gray-100 rounded-2xl mb-4"></div>
+          <div class="h-4 bg-gray-100 rounded-full w-2/3 mb-3"></div>
+          <div class="h-3 bg-gray-50 rounded-full w-full mb-2"></div>
+          <div class="h-3 bg-gray-50 rounded-full w-1/2 mb-6"></div>
+          <div class="flex justify-between items-center">
+            <div class="h-6 bg-green-50 rounded-lg w-16"></div>
+            <div class="h-10 w-10 bg-gray-100 rounded-xl"></div>
+          </div>
+        </div>
+      }
+    </div>
+  } @else {
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 p-4">
+      @for (
+        product of products() | paginate: {itemsPerPage: itemsPerPage, currentPage: page, totalItems: totalItems} | search:text;
+        track product._id
+      ) {
+        <app-product-card [product]="product" class="transition-transform duration-300 hover:scale-[1.02]"></app-product-card>
+      } @empty {
+        <div class="col-span-full flex flex-col items-center justify-center py-24 bg-white rounded-4xl border-2 border-dashed border-gray-100 shadow-inner">
+          <div class="bg-gray-50 p-6 rounded-full mb-4">
+            <i class="fa-solid fa-box-open text-5xl text-gray-300"></i>
+          </div>
+          <h3 class="text-xl font-bold text-gray-800">No matches found</h3>
+          <p class="text-gray-500 mt-2 font-medium">
+            Try adjusting your search for "{{ text }}" or browse other categories.
+          </p>
+        </div>
+      }
+    </div>
+
+    <div class="mt-12 flex flex-col items-center gap-4">
+      <pagination-controls
+        (pageChange)="changePage($event)"
+        [maxSize]="5"
+        previousLabel="‹"
+        nextLabel="›"
+        class="custom-pagination">
+      </pagination-controls>
+
+      <p class="text-xs font-bold text-gray-400 uppercase tracking-widest" *ngIf="totalPages">
+        Page {{ page }} of {{ totalPages }}
+      </p>
+    </div>
+  }
+</div>

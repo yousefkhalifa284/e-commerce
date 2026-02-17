@@ -1,0 +1,67 @@
+<div class="group relative bg-white rounded-4xl border border-gray-100 p-3 transition-all duration-500 hover:shadow-[0_20px_50px_rgba(22,163,74,0.15)] hover:-translate-y-2">
+
+  <div class="relative overflow-hidden rounded-3xl bg-gray-50 aspect-square flex items-center justify-center">
+    <img [src]="product.imageCover"
+         [routerLink]="['/product-datails', product.id]"
+         class="w-full h-full object-contain p-4 transform transition-transform duration-500 group-hover:scale-110 cursor-pointer"
+         [alt]="product.title" />
+
+    <div class="absolute top-3 right-3 flex flex-col gap-2">
+      <button (click)="toggleWishlist(product.id)"
+              [disabled]="isLoadingWishlist()"
+              class="p-2.5 bg-white/90 backdrop-blur-md rounded-full shadow-sm transition-all duration-300 hover:scale-110 disabled:opacity-50"
+              [class.text-red-500]="isInWishlist()"
+              [class.text-gray-400]="!isInWishlist()">
+
+        @if (isLoadingWishlist()) {
+          <i class="fas fa-spinner fa-spin text-xs"></i>
+        } @else {
+          <svg class="w-5 h-5"
+               [attr.fill]="isInWishlist() ? 'currentColor' : 'none'"
+               stroke="currentColor"
+               viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z">
+            </path>
+          </svg>
+        }
+      </button>
+    </div>
+  </div>
+
+  <div class="px-2 mt-3 cursor-pointer" [routerLink]="['/product-details', product.id]">
+    <div class="flex justify-between items-start mb-1">
+      <span class="text-[10px] font-bold text-green-600 uppercase tracking-widest bg-green-50 px-2 py-0.5 rounded-md">
+        {{ product.category.name }}
+      </span>
+      <div class="flex items-center gap-1 bg-yellow-50 px-2 py-0.5 rounded-md">
+        <i class="fas fa-star text-yellow-400 text-[10px]"></i>
+        <span class="text-gray-700 text-[10px] font-bold">{{ product.ratingsAverage }}</span>
+      </div>
+    </div>
+    <h3 class="text-gray-800 font-bold text-lg mb-1 line-clamp-1 group-hover:text-green-600 transition-colors">
+      {{ product.title }}
+    </h3>
+  </div>
+
+  <div class="flex justify-between items-center my-4 px-2">
+    <div>
+      <span class="text-[10px] text-gray-400 block font-bold uppercase tracking-tighter">Price</span>
+      <span class="text-xl font-black text-gray-900">
+        {{ product.price }} <small class="text-[10px] font-medium uppercase">EGP</small>
+      </span>
+    </div>
+
+        <button (click)="addProductItemToCart(product.id)"
+        [disabled]="isLoadingCart()"
+         class="bg-green-600 text-white p-3 rounded-xl shadow-lg shadow-green-200 transform transition-all duration-300 hover:bg-green-700 active:scale-90 group-hover:rotate-360">
+           @if (isLoadingCart()) {
+        <i class="fas fa-spinner fa-spin w-5 h-5"></i>
+      } @else {
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+        </svg>
+      }
+        </button>
+  </div>
+</div>

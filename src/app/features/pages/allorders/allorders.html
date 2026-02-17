@@ -1,0 +1,85 @@
+<div class="min-h-screen bg-gray-50/50 pt-28 pb-12">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    <div class="flex items-center gap-4 mb-10">
+      <div class="bg-green-600 p-3 rounded-2xl shadow-lg shadow-green-200">
+        <i class="fa-solid fa-box-open text-white text-xl"></i>
+      </div>
+      <div>
+        <h1 class="text-3xl font-black text-gray-900 tracking-tight">My Orders</h1>
+        <p class="text-gray-500 font-medium">History and status of your recent purchases</p>
+      </div>
+    </div>
+
+    @if (isLoading()) {
+      <div class="space-y-6 animate-pulse">
+        @for (i of [1,2,3]; track i) {
+          <div class="bg-white h-48 rounded-[2rem] border border-gray-100"></div>
+        }
+      </div>
+    } @else {
+      <div class="space-y-6">
+        @for (order of orders(); track order.id) {
+          <div class="bg-white rounded-[2.5rem] border border-gray-100 shadow-sm overflow-hidden transition-all hover:shadow-md">
+
+            <div class="px-8 py-6 bg-gray-50/50 border-b border-gray-100 flex flex-wrap justify-between items-center gap-4">
+              <div class="flex items-center gap-4">
+                <span class="px-4 py-1.5 bg-green-100 text-green-700 text-xs font-bold rounded-full uppercase tracking-wider">
+                  Order #{{ order.id }}
+                </span>
+                <span class="text-sm text-gray-400 font-medium">
+                  {{ order.createdAt | date:'mediumDate' }}
+                </span>
+              </div>
+              <div class="flex items-center gap-3">
+                <span [ngClass]="{
+                  'bg-blue-100 text-blue-700': !order.isDelivered,
+                  'bg-green-100 text-green-700': order.isDelivered
+                }" class="px-4 py-1.5 rounded-full text-xs font-black">
+                   {{ order.isDelivered ? 'Delivered' : 'In Progress' }}
+                </span>
+                <span class="text-lg font-black text-gray-900">
+                  {{ order.totalOrderPrice }} <small class="text-[10px] text-gray-400">EGP</small>
+                </span>
+              </div>
+            </div>
+
+            <div class="p-8">
+              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                @for (item of order.cartItems; track item._id) {
+                  <div class="flex items-center gap-4 bg-gray-50/50 p-3 rounded-2xl border border-gray-100/50">
+                    <div class="w-16 h-16 bg-white rounded-xl overflow-hidden shrink-0 border border-gray-100">
+                      <img [src]="item.product.imageCover" [alt]="item.product.title" class="w-full h-full object-contain p-1">
+                    </div>
+                    <div class="overflow-hidden">
+                      <h4 class="text-sm font-bold text-gray-800 truncate">{{ item.product.title }}</h4>
+                      <p class="text-xs text-gray-400 font-medium">Qty: {{ item.count }} | Price: {{ item.price }} EGP</p>
+                    </div>
+                  </div>
+                }
+              </div>
+            </div>
+
+            <div class="px-8 py-4 bg-green-50/30 flex items-center gap-2">
+              <i class="fa-solid fa-truck-fast text-green-600"></i>
+              <p class="text-xs font-bold text-green-800">
+                Shipping to: <span class="text-green-600 font-medium ml-1">{{ order.shippingAddress.city }} - {{ order.shippingAddress.details }}</span>
+              </p>
+            </div>
+          </div>
+        } @empty {
+          <div class="text-center py-24 bg-white rounded-[3rem] border-2 border-dashed border-gray-200">
+            <div class="w-20 h-20 bg-gray-50 rounded-full flex items-center justify-center mx-auto mb-4">
+              <i class="fa-solid fa-receipt text-3xl text-gray-200"></i>
+            </div>
+            <h3 class="text-xl font-black text-gray-800">No orders yet</h3>
+            <p class="text-gray-400 mt-2 font-medium">You haven't placed any orders in our market yet.</p>
+            <button routerLink="/allproducts" class="mt-6 px-8 py-3 bg-green-600 text-white font-bold rounded-2xl hover:bg-green-700 transition-all">
+              Start Shopping
+            </button>
+          </div>
+        }
+      </div>
+    }
+  </div>
+</div>

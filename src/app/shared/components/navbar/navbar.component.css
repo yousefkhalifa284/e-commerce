@@ -1,0 +1,66 @@
+/* navbar.component.css */
+:host {
+  display: block;
+}
+
+/* تحسينات للحركة */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+#mobile-navbar-menu {
+  animation: slideIn 0.3s ease-out;
+}
+
+/* تحسينات للـ RTL إذا كان الموقع بالعربية */
+[dir="rtl"] .ml-2,
+[dir="rtl"] .ml-3,
+[dir="rtl"] .ml-4 {
+  margin-left: 0;
+  margin-right: 0.5rem;
+}
+
+[dir="rtl"] .border-l {
+  border-left-width: 0;
+  border-right-width: 1px;
+}
+
+[dir="rtl"] .pl-2,
+[dir="rtl"] .pl-3,
+[dir="rtl"] .pl-4 {
+  padding-left: 0;
+  padding-right: 0.5rem;
+}
+
+/* تحسينات للأداء */
+.gpu-accelerated {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/* منع التمرير عند فتح القائمة */
+body.menu-open {
+  overflow: hidden;
+}
+
+/* تحسينات للـ hover على التابلت */
+@media (hover: hover) {
+  .hover-scale:hover {
+    transform: scale(1.05);
+  }
+}
+
+/* تحسينات للموبايل */
+@media (max-width: 640px) {
+  .nav-link {
+    -webkit-tap-highlight-color: transparent;
+  }
+}

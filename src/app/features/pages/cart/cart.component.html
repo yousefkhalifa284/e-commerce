@@ -1,0 +1,133 @@
+<div class="min-h-screen bg-gray-50/50 pt-28 pb-12">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    <div class="flex items-center gap-4 mb-10">
+      <div class="bg-green-600 p-3 rounded-2xl shadow-lg shadow-green-200">
+        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
+        </svg>
+      </div>
+      <div>
+        <h1 class="text-3xl font-black text-gray-900 tracking-tight">Shopping Cart</h1>
+        @if (isLoading()) {
+          <div class="h-4 bg-gray-200 rounded-full w-40 mt-2 animate-pulse"></div>
+        } @else if (cardDetailsData().products) {
+          <p class="text-gray-500 font-medium">You have {{ cardDetailsData().products.length }} items in your cart</p>
+        }
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+
+      <div class="lg:col-span-2 space-y-4">
+        @if (isLoading()) {
+          @for (i of [1,2,3]; track $index) {
+            <div class="bg-white p-4 rounded-[2rem] border border-gray-100 flex flex-col sm:flex-row items-center gap-6 relative overflow-hidden">
+              <div class="shimmer"></div>
+              <div class="w-28 h-28 bg-gray-100 rounded-2xl shrink-0"></div>
+              <div class="grow space-y-3">
+                <div class="h-3 bg-green-50 rounded-lg w-16"></div>
+                <div class="h-5 bg-gray-100 rounded-full w-3/4"></div>
+                <div class="h-6 bg-gray-50 rounded-lg w-24"></div>
+              </div>
+              <div class="w-32 h-12 bg-gray-50 rounded-2xl"></div>
+              <div class="w-10 h-10 bg-gray-50 rounded-full"></div>
+            </div>
+          }
+        } @else {
+          @for (item of cardDetailsData().products; track item.product._id) {
+            <div class="bg-white p-4 rounded-[2rem] border border-gray-100 shadow-sm flex flex-col sm:flex-row items-center gap-6 transition-all hover:shadow-md group">
+              <div class="w-28 h-28 bg-gray-50 rounded-2xl overflow-hidden shrink-0">
+                <img [src]="item.product.imageCover" [alt]="item.product.title" class="w-full h-full object-contain p-2 group-hover:scale-110 transition-transform">
+              </div>
+
+              <div class="grow text-center sm:text-left">
+                <span class="text-[10px] font-bold text-green-600 uppercase tracking-widest bg-green-50 px-2 py-0.5 rounded-md">
+                  {{ item.product.category.name }}
+                </span>
+                <h3 class="text-lg font-bold text-gray-800 mt-1 line-clamp-1">{{ item.product.title }}</h3>
+                <p class="text-green-600 font-black text-xl mt-2">{{ item.price * item.count }} <small class="text-[10px]">EGP</small></p>
+              </div>
+
+              <div class="flex items-center gap-4 bg-gray-50 p-2 rounded-2xl border border-gray-100">
+                <button (click)="updateProductCount(item.product._id, item.count-1)" class="cursor-pointer w-10 h-10 flex items-center justify-center bg-white rounded-xl shadow-sm text-gray-600 hover:text-green-600 transition-colors disabled:opacity-30" [disabled]="item.count <= 1">
+                  <i class="fa-solid fa-minus"></i>
+                </button>
+                <span class="font-bold text-gray-800 min-w-5 text-center">{{item.count}}</span>
+                <button (click)="updateProductCount(item.product._id, item.count+1)" class="cursor-pointer w-10 h-10 flex items-center justify-center bg-white rounded-xl shadow-sm text-gray-600 hover:text-green-600 transition-colors">
+                  <i class="fa-solid fa-plus"></i>
+                </button>
+              </div>
+
+              <button (click)="removeProductItemFromCart(item.product._id)" class="p-4 cursor-pointer text-gray-400 hover:text-red-500 transition-colors">
+                <i class="fa-solid fa-trash-can text-xl"></i>
+              </button>
+            </div>
+          } @empty {
+            <div class="text-center py-20 bg-white rounded-[3rem] border-2 border-dashed border-gray-200">
+              <i class="fa-solid fa-cart-arrow-down text-6xl text-gray-200 mb-4"></i>
+              <h3 class="text-xl font-bold text-gray-800">Your cart is empty</h3>
+              <button routerLink="/home" class="mt-4 text-green-600 font-bold hover:underline cursor-pointer">Start Shopping</button>
+            </div>
+          }
+        }
+      </div>
+
+      <div class="lg:col-span-1">
+        @if (isLoading()) {
+          <div class="bg-white p-8 rounded-[2.5rem] border border-gray-100 space-y-6 relative overflow-hidden">
+            <div class="shimmer"></div>
+            <div class="h-6 bg-gray-100 rounded-full w-1/2"></div>
+            <div class="space-y-4 pt-4 border-t border-gray-50">
+              <div class="flex justify-between"><div class="h-4 bg-gray-50 rounded-full w-20"></div><div class="h-4 bg-gray-50 rounded-full w-10"></div></div>
+              <div class="flex justify-between pt-4 border-t border-gray-50"><div class="h-4 bg-gray-50 rounded-full w-24"></div><div class="h-8 bg-green-50 rounded-lg w-24"></div></div>
+            </div>
+            <div class="h-14 bg-gray-100 rounded-2xl w-full"></div>
+            <div class="h-14 bg-gray-100 rounded-2xl w-full"></div>
+          </div>
+        } @else {
+          <div class="bg-white p-8 rounded-[2.5rem] border border-gray-100 shadow-xl shadow-gray-200/50 sticky top-28">
+            <h2 class="text-xl font-black text-gray-900 mb-6">Order Summary</h2>
+
+            <div class="space-y-4 mb-8">
+              <div class="flex justify-between text-gray-500 font-medium">
+                <span class="text-gray-900 font-bold">Total Item</span>
+                <span class="text-green-600 font-bold">{{ cardDetailsData().products?.length || 0 }}</span>
+              </div>
+              <div class="border-t border-gray-100 pt-4 flex justify-between items-end">
+                <span class="text-gray-900 font-bold">Total Amount</span>
+                <div class="text-right">
+                  <p class="text-3xl font-black text-green-600 leading-none">{{ cardDetailsData().totalCartPrice }}</p>
+                  <small class="text-[10px] text-gray-400 font-bold uppercase">egp</small>
+                </div>
+              </div>
+            </div>
+
+            <div class="flex flex-col gap-3">
+              <button [routerLink]="!isCheckoutDisabled() ? ['/checkout', cardDetailsData()._id] : null" [disabled]="isCheckoutDisabled()" class="w-full bg-green-600 disabled:bg-gray-300 disabled:cursor-not-allowed hover:bg-green-700 text-white font-bold py-4 rounded-2xl shadow-lg transition-all active:scale-95 flex items-center justify-center gap-3 group cursor-pointer">
+                <i class="fa-solid fa-credit-card text-sm"></i>
+                <span>Pay Online (Stripe)</span>
+              </button>
+
+              <button [routerLink]="!isCheckoutDisabled() ? ['/cash', cardDetailsData()._id] : null" [disabled]="isCheckoutDisabled()" class="w-full bg-slate-900 disabled:bg-gray-300 disabled:cursor-not-allowed hover:bg-black text-white font-bold py-4 rounded-2xl shadow-lg transition-all active:scale-95 flex items-center justify-center gap-3 group cursor-pointer">
+                <i class="fa-solid fa-money-bill-wave text-sm text-green-400"></i>
+                <span>Cash on Delivery</span>
+              </button>
+            </div>
+
+            <div class="mt-6 flex flex-col gap-3">
+              <div class="flex items-center gap-3 text-xs text-gray-400 font-medium bg-gray-50 p-3 rounded-xl">
+                <i class="fa-solid fa-shield-check text-green-500 text-lg"></i>
+                Secure Checkout Guaranteed
+              </div>
+              <button (click)="clearUserCart()" class="w-full py-3 text-red-500 font-bold text-sm hover:bg-red-50 rounded-xl transition-colors cursor-pointer">
+                Clear Shopping Cart
+              </button>
+            </div>
+          </div>
+        }
+      </div>
+
+    </div>
+  </div>
+</div>
