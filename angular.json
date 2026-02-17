@@ -40,7 +40,23 @@
             "ssr": {
               "entry": "src/server.ts"
             },
-            "prerender": false
+            "prerender": {
+              "enabled": true,
+              "routes": [
+                {
+                  "path": "/product-datails/:id",
+                  "getPrerenderParams": "getProductDetailsParams"
+                },
+                {
+                  "path": "/checkout/:id",
+                  "getPrerenderParams": "getCheckoutParams"
+                },
+                {
+                  "path": "/category-products/:id",
+                  "getPrerenderParams": "getCategoryParams"
+                }
+              ]
+            }
           },
           "configurations": {
             "production": {
