@@ -1,10 +1,10 @@
-
 import { Routes } from '@angular/router';
 import { authGuard } from './core/guards/auth/auth-guard';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'login', pathMatch: 'full' },
 
+    // مجموغة مسارات الزائر (Guest)
     {
         path: '',
         loadComponent: () => import('./core/layouts/component/guest-layout/guest-layout.component')
@@ -30,6 +30,8 @@ export const routes: Routes = [
             }
         ]
     },
+
+    // مجموعة مسارات المستخدم (User)
     {
         path: '',
         loadComponent: () => import('./core/layouts/component/user-layout/user-layout.component')
@@ -121,9 +123,11 @@ export const routes: Routes = [
             },
         ]
     },
+
+    // صفحة الخطأ (يجب أن تكون دائماً في آخر الملف)
     {
         path: '**',
-        title: 'Page Not Found',
+        title: '404 - Page Not Found',
         loadComponent: () => import('./features/pages/not-found/not-found.component')
             .then(c => c.NotFoundComponent)
     }
