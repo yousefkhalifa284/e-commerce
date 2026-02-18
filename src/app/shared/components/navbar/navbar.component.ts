@@ -5,18 +5,19 @@ import { Cart } from '../../../features/pages/cart/services/cart';
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [RouterLink, RouterLinkActive,],
+  imports: [RouterLink, RouterLinkActive],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css',
 })
 export class NavbarComponent implements OnInit {
-
   @Input({ required: true }) isUser: boolean = false;
 
   private readonly cartService = inject(Cart);
   private readonly router = inject(Router);
 
   cartCount = this.cartService.cartCount;
+
+  isMobileMenuOpen = false;
 
   pages = [
     { text: 'Home', link: '/home' },
@@ -31,6 +32,10 @@ export class NavbarComponent implements OnInit {
     if (this.isUser) {
       this.cartService.getLoggedUserCart().subscribe();
     }
+  }
+
+  toggleMobileMenu() {
+    this.isMobileMenuOpen = !this.isMobileMenuOpen;
   }
 
   signOut(): void {

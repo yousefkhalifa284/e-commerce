@@ -2,6 +2,7 @@ import { Component, computed, inject, OnInit, signal, WritableSignal } from '@an
 import { Cart } from './services/cart';
 import { CartDetails } from './models/cart-details';
 import { RouterLink } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-cart',
@@ -11,19 +12,24 @@ import { RouterLink } from '@angular/router';
   styleUrl: './cart.component.css',
 })
 export class CartComponent implements OnInit {
+  // --- Signals ---
   cardDetailsData: WritableSignal<CartDetails> = signal<CartDetails>({} as CartDetails);
-  isLoading = signal(true); // حالة التحميل الأساسية
+  isLoading = signal(true);
+  isRemovingId = signal<string | null>(null);
+  isClearingCart = signal<boolean>(false);
 
-  private readonly cart = inject(Cart);
-  private readonly _CartService = inject(Cart);
+  // --- Services ---
+  private readonly _cartService = inject(Cart);
+  private readonly _toastr = inject(ToastrService);
 
   ngOnInit(): void {
     this.getUserCartData();
   }
 
-  getUserCartData() {
+
+  getUserCartData(): void {
     this.isLoading.set(true);
-    this.cart.getLoggedUserCart().subscribe({
+    this._cartService.getLoggedUserCart().subscribe({
       next: (res) => {
         if (res.status === 'success') {
           this.cardDetailsData.set(res.data);
@@ -37,36 +43,53 @@ export class CartComponent implements OnInit {
     });
   }
 
+
   removeProductItemFromCart(id: string): void {
-    this.cart.removeProductFromCart(id).subscribe({
+    this.isRemovingId.set(id);
+    this._cartService.removeProductFromCart(id).subscribe({
       next: (res) => {
         if (res.status === 'success') {
           this.cardDetailsData.set(res.data);
+          this._toastr.error('Product removed from your cart');
+        }
+        this.isRemovingId.set(null);
+      },
+      error: (err) => {
+        console.error(err);
+        this.isRemovingId.set(null);
+      }
+    });
+  }
+
+  updateProductCount(id: string, count: number): void {
+    if (count <= 0) return;
+
+    this._cartService.updateProductCartQuantity(id, count).subscribe({
+      next: (res) => {
+        if (res.status === 'success') {
+          this.cardDetailsData.set(res.data);
+          this._toastr.success('Quantity updated');
         }
       },
       error: (err) => console.error(err)
     });
   }
 
-  updateProductCount(id: string, count: number) {
-    if (count <= 0) return; // منع الكميات السالبة
-    this.cart.updateProductCartQuantity(id, count).subscribe({
-      next: (res) => {
-        if (res.status === 'success') {
-          this.cardDetailsData.set(res.data);
-        }
-      },
-      error: (err) => console.error(err)
-    });
-  }
 
-  clearUserCart() {
-    this._CartService.clearCart().subscribe({
+  clearUserCart(): void {
+    this.isClearingCart.set(true);
+    this._cartService.clearCart().subscribe({
       next: (res) => {
-        this.cardDetailsData.set({} as CartDetails);
-        this.getUserCartData();
+        if (res.message === 'success') {
+          this.cardDetailsData.set({} as CartDetails);
+          this._toastr.info('Your cart is now empty');
+        }
+        this.isClearingCart.set(false);
       },
-      error: (err) => console.error(err)
+      error: (err) => {
+        console.error(err);
+        this.isClearingCart.set(false);
+      }
     });
   }
 

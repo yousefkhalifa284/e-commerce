@@ -19,9 +19,9 @@ export class MainSliderComponent {
     autoplayTimeout: 2000,
     autoplayHoverPause: true,
     margin: 10,
-    navText: ['<i class="fa-solid fa-chevron-left"></i>', '<i class="fa-solid fa-chevron-right"></i>'],
+    navText: [],
     items: 1,
-    nav: true,
+    nav: false,
 
   }
 

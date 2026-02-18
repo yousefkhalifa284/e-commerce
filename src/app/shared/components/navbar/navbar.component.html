@@ -5,10 +5,10 @@
       <a routerLink="/" class="flex items-center gap-3 group">
         <div class="relative">
           <div class="absolute -inset-1 bg-linear-to-r from-green-600 to-emerald-400 rounded-lg blur opacity-25 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
-          <div class="relative bg-green-600 p-2 rounded-lg transform group-hover:scale-110  duration-300 shadow-lg">
-             <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
-             </svg>
+          <div class="relative bg-green-600 p-2 rounded-lg transform group-hover:scale-110 transition-transform duration-300 shadow-lg">
+            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+            </svg>
           </div>
         </div>
         <div class="flex flex-col">
@@ -32,67 +32,81 @@
       </div>
 
       <div class="flex items-center gap-3">
-
         <div class="flex items-center gap-2">
-
-
-        @if (isUser) {
-          <a routerLink="/cart"
-             class="relative p-2.5 text-gray-500 hover:text-green-600 hover:bg-green-50 rounded-full transition">
-
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z">
-              </path>
-            </svg>
-
-            @if (cartCount() > 0) {
-              <span
-                class="absolute top-0 right-0 bg-green-600 text-white text-[10px] font-bold h-5 w-5 flex items-center justify-center rounded-full border-2 border-white">
-                {{ cartCount() }}
-              </span>
-            }
-
-          </a>
-        }
+          @if (isUser) {
+            <a routerLink="/cart"
+               class="relative p-2.5 text-gray-500 hover:text-green-600 hover:bg-green-50 rounded-full transition">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
+              </svg>
+              @if (cartCount() > 0) {
+                <span
+                  class="absolute top-0 right-0 bg-green-600 text-white text-[10px] font-bold h-5 w-5 flex items-center justify-center rounded-full border-2 border-white">
+                  {{ cartCount() }}
+                </span>
+              }
+            </a>
+          }
         </div>
 
         <div class="hidden sm:flex items-center gap-3 ml-2 border-l border-gray-200 pl-4">
           @if (!isUser) {
-            <a routerLink="/login" class="text-sm font-bold text-gray-700 hover:text-green-600 transition " >Log In</a>
+            <a routerLink="/login" class="text-sm font-bold text-gray-700 hover:text-green-600 transition">Log In</a>
             <a routerLink="/signup" class="relative inline-flex items-center justify-center px-6 py-2.5 overflow-hidden font-bold text-white transition-all duration-300 bg-green-600 rounded-xl hover:bg-green-700 shadow-[0_10px_20px_-10px_rgba(22,163,74,0.5)]">
               Sign Up
             </a>
           }
           @if (isUser) {
-            <button class="flex items-center gap-1 px-3 py-2 text-sm font-bold text-red-500 hover:bg-red-50 rounded-lg transition-all group " (click)="signOut()">
+            <button class="flex items-center gap-1 px-3 py-2 text-sm font-bold text-red-500 hover:bg-red-50 rounded-lg transition-all group" (click)="signOut()">
               Logout
-              <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+              <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
+              </svg>
             </button>
           }
         </div>
 
-        <button data-collapse-toggle="mobile-navbar-menu" type="button" class="lg:hidden p-2.5 rounded-xl bg-gray-50 text-gray-600 hover:bg-gray-100 transition-colors">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+        <button (click)="toggleMobileMenu()" type="button" class="lg:hidden p-2.5 rounded-xl bg-gray-50 text-gray-600 hover:bg-gray-100 transition-colors">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
         </button>
       </div>
     </div>
   </div>
 
-  <div id="mobile-navbar-menu" class="hidden lg:hidden bg-white/95 backdrop-blur-xl border-t border-gray-100 shadow-2xl overflow-hidden">
+  <div id="mobile-navbar-menu"
+       [class.hidden]="!isMobileMenuOpen"
+       class="lg:hidden bg-white/95 backdrop-blur-xl border-t border-gray-100 shadow-2xl overflow-hidden">
     <div class="px-6 py-8 space-y-4">
       @if (isUser) {
         @for (page of pages; track $index) {
-          <a routerLink="/{{page.link}}" class="block text-xl font-bold text-gray-800 hover:text-green-600 transition">{{page.text}}</a>
+          <a routerLink="/{{page.link}}"
+             class="block text-xl font-bold text-gray-800 hover:text-green-600 transition"
+             (click)="isMobileMenuOpen = false">
+            {{page.text}}
+          </a>
         }
       }
 
       <div class="pt-6 border-t border-gray-100 grid grid-cols-2 gap-4">
         @if (!isUser) {
-          <a routerLink="/login" class="py-4 rounded-2xl text-center font-bold text-gray-700 bg-gray-50">Login</a>
-          <a routerLink="/signup" class="py-4 rounded-2xl text-center font-bold text-white bg-green-600 shadow-lg shadow-green-200">Sign Up</a>
+          <a routerLink="/login"
+             class="py-4 rounded-2xl text-center font-bold text-gray-700 bg-gray-50"
+             (click)="isMobileMenuOpen = false">
+            Login
+          </a>
+          <a routerLink="/signup"
+             class="py-4 rounded-2xl text-center font-bold text-white bg-green-600 shadow-lg shadow-green-200"
+             (click)="isMobileMenuOpen = false">
+            Sign Up
+          </a>
         } @else {
-          <button class="col-span-2 py-4 rounded-2xl text-center font-bold text-red-500 bg-red-50 cursor-pointer" (click)="signOut()"  >Sign Out</button>
+          <button class="col-span-2 py-4 rounded-2xl text-center font-bold text-red-500 bg-red-50 cursor-pointer"
+                  (click)="signOut(); isMobileMenuOpen = false">
+            Sign Out
+          </button>
         }
       </div>
     </div>

@@ -40,7 +40,6 @@ export class ProductCardComponent implements OnInit {
     this.isLoadingWishlist.set(true);
 
     if (this.isInWishlist()) {
-      // إزالة من الـ Wishlist
       this.wishlistService.removeProductFromWishlist(id).subscribe({
         next: (res) => {
           this.toastrService.warning('Removed from wishlist', 'FreshCart');
@@ -50,7 +49,6 @@ export class ProductCardComponent implements OnInit {
         error: () => this.isLoadingWishlist.set(false)
       });
     } else {
-      // إضافة للـ Wishlist
       this.wishlistService.addProductToWishlist(id).subscribe({
         next: (res) => {
           this.toastrService.success(res.message, 'FreshCart');

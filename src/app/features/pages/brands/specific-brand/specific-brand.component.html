@@ -14,7 +14,6 @@
           <img [src]="brand()?.image" [alt]="brand()?.name" class="w-32 h-32 md:w-40 md:h-40 object-contain">
         </div>
       </div>
-
       <div class="text-center md:text-left space-y-4">
         <h1 class="text-4xl md:text-6xl font-black text-gray-900 tracking-tighter">
           {{ brand()?.name }}
@@ -53,7 +52,7 @@
       @if (!isLoadingProducts() && products().length > 0) {
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 lg:gap-10">
           @for (product of products(); track product._id) {
-            <div [routerLink]="['/product-details', product._id]"
+            <div [routerLink]="['/product-datails', product._id]"
                  class="group relative bg-white rounded-[2.5rem] p-5 border border-gray-50 shadow-xl shadow-gray-200/50 hover:shadow-2xl hover:shadow-green-600/10 transition-all duration-500 hover:-translate-y-3 cursor-pointer overflow-hidden">
 
               <div class="relative overflow-hidden rounded-[2rem] bg-gray-50 aspect-square mb-6 shadow-inner border border-gray-50">
@@ -117,7 +116,7 @@
           </div>
           <h3 class="text-3xl font-black text-gray-800 mb-4 tracking-tighter">THE COLLECTION IS EMPTY</h3>
           <p class="text-gray-500 font-medium mb-10 max-w-sm mx-auto leading-relaxed">We are currently updating the catalog. New items arriving soon!</p>
-          <button routerLink="/brands"
+          <button routerLink="/brand"
                   class="group bg-gray-900 text-white px-10 py-4 rounded-2xl font-black hover:bg-green-600 transition-all duration-300 shadow-xl hover:shadow-green-600/30 active:scale-95 flex items-center gap-3 mx-auto">
             <i class="fas fa-arrow-left group-hover:-translate-x-1 transition-transform"></i>
             BACK TO BRANDS
