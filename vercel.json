@@ -1,7 +1,7 @@
 {
-  "buildCommand": "npx ng build --configuration=production --project e-commerce -c=production --output-path=dist/e-commerce",
+  "buildCommand": "npm run build",
   "outputDirectory": "dist/e-commerce/browser",
-  "installCommand": "npm install",
+  "installCommand": "npm install --legacy-peer-deps",
   "devCommand": "ng serve",
   "framework": "angular"
 }
