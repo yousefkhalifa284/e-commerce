@@ -45,9 +45,7 @@
             "ssr": {
               "entry": "src/server.ts"
             },
-            "prerender": {
-              "discoverRoutes": false
-            }
+            "prerender": false
           },
           "configurations": {
             "production": {
@@ -63,12 +61,14 @@
                   "maximumError": "20kb"
                 }
               ],
-              "outputHashing": "all"
+              "outputHashing": "all",
+              "prerender": false
             },
             "development": {
               "optimization": false,
               "extractLicenses": false,
-              "sourceMap": true
+              "sourceMap": true,
+              "prerender": false
             }
           },
           "defaultConfiguration": "production"
