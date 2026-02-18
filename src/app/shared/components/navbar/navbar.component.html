@@ -1,21 +1,21 @@
 <nav class="bg-white/70 backdrop-blur-lg border-b border-gray-100 fixed w-full top-0 left-0 z-50 transition-all duration-500 hover:bg-white/90">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="flex items-center justify-between h-20">
+    <div class="flex items-center justify-between h-24 lg:h-20">
 
       <a routerLink="/" class="flex items-center gap-3 group">
         <div class="relative">
           <div class="absolute -inset-1 bg-linear-to-r from-green-600 to-emerald-400 rounded-lg blur opacity-25 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
-          <div class="relative bg-green-600 p-2 rounded-lg transform group-hover:scale-110 transition-transform duration-300 shadow-lg">
-            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div class="relative bg-green-600 p-2.5 lg:p-2 rounded-xl lg:rounded-lg transform group-hover:scale-110 transition-transform duration-300 shadow-lg">
+            <svg class="w-7 h-7 lg:w-6 lg:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
             </svg>
           </div>
         </div>
         <div class="flex flex-col">
-          <span class="text-2xl font-black bg-linear-to-r from-green-700 via-green-600 to-emerald-500 bg-clip-text text-transparent tracking-tighter">
+          <span class="text-3xl lg:text-2xl font-black bg-linear-to-r from-green-700 via-green-600 to-emerald-500 bg-clip-text text-transparent tracking-tighter">
             FreshCart
           </span>
-          <span class="text-[10px] text-gray-400 font-medium uppercase tracking-[0.2em] -mt-1">Online Market</span>
+          <span class="text-[11px] lg:text-[10px] text-gray-400 font-medium uppercase tracking-[0.2em] -mt-1">Online Market</span>
         </div>
       </a>
 
@@ -31,18 +31,18 @@
         }
       </div>
 
-      <div class="flex items-center gap-3">
+      <div class="flex items-center gap-4 lg:gap-3">
         <div class="flex items-center gap-2">
           @if (isUser) {
             <a routerLink="/cart"
-               class="relative p-2.5 text-gray-500 hover:text-green-600 hover:bg-green-50 rounded-full transition">
-              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+               class="relative p-3 lg:p-2.5 text-gray-500 hover:text-green-600 hover:bg-green-50 rounded-full transition">
+              <svg class="w-7 h-7 lg:w-6 lg:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                   d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
               </svg>
               @if (cartCount() > 0) {
                 <span
-                  class="absolute top-0 right-0 bg-green-600 text-white text-[10px] font-bold h-5 w-5 flex items-center justify-center rounded-full border-2 border-white">
+                  class="absolute top-0 right-0 bg-green-600 text-white text-[11px] lg:text-[10px] font-bold h-6 w-6 lg:h-5 lg:w-5 flex items-center justify-center rounded-full border-2 border-white">
                   {{ cartCount() }}
                 </span>
               }
@@ -67,8 +67,8 @@
           }
         </div>
 
-        <button (click)="toggleMobileMenu()" type="button" class="lg:hidden p-2.5 rounded-xl bg-gray-50 text-gray-600 hover:bg-gray-100 transition-colors">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <button (click)="toggleMobileMenu()" type="button" class="lg:hidden p-3 rounded-2xl bg-gray-50 text-gray-600 hover:bg-gray-100 transition-colors">
+          <svg class="w-7 h-7 lg:w-6 lg:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
           </svg>
         </button>
@@ -79,31 +79,31 @@
   <div id="mobile-navbar-menu"
        [class.hidden]="!isMobileMenuOpen"
        class="lg:hidden bg-white/95 backdrop-blur-xl border-t border-gray-100 shadow-2xl overflow-hidden">
-    <div class="px-6 py-8 space-y-4">
+    <div class="px-6 py-10 space-y-6">
       @if (isUser) {
         @for (page of pages; track $index) {
           <a routerLink="/{{page.link}}"
-             class="block text-xl font-bold text-gray-800 hover:text-green-600 transition"
+             class="block text-2xl font-bold text-gray-800 hover:text-green-600 transition"
              (click)="isMobileMenuOpen = false">
             {{page.text}}
           </a>
         }
       }
 
-      <div class="pt-6 border-t border-gray-100 grid grid-cols-2 gap-4">
+      <div class="pt-8 border-t border-gray-100 grid grid-cols-2 gap-4">
         @if (!isUser) {
           <a routerLink="/login"
-             class="py-4 rounded-2xl text-center font-bold text-gray-700 bg-gray-50"
+             class="py-5 rounded-2xl text-center font-bold text-lg text-gray-700 bg-gray-50"
              (click)="isMobileMenuOpen = false">
             Login
           </a>
           <a routerLink="/signup"
-             class="py-4 rounded-2xl text-center font-bold text-white bg-green-600 shadow-lg shadow-green-200"
+             class="py-5 rounded-2xl text-center font-bold text-lg text-white bg-green-600 shadow-lg shadow-green-200"
              (click)="isMobileMenuOpen = false">
             Sign Up
           </a>
         } @else {
-          <button class="col-span-2 py-4 rounded-2xl text-center font-bold text-red-500 bg-red-50 cursor-pointer"
+          <button class="col-span-2 py-5 rounded-2xl text-center font-bold text-xl text-red-500 bg-red-50 cursor-pointer"
                   (click)="signOut(); isMobileMenuOpen = false">
             Sign Out
           </button>
@@ -113,4 +113,4 @@
   </div>
 </nav>
 
-<div class="h-20"></div>
+<div class="h-24 lg:h-20"></div>

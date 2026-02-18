@@ -1,26 +1,29 @@
 <div
-  class="group relative bg-white rounded-[2rem] border border-gray-100 overflow-hidden
+  class="group relative bg-white rounded-[2.5rem] border border-gray-100 overflow-hidden
          transition-all duration-500 hover:-translate-y-2
          hover:shadow-[0_25px_60px_rgba(22,163,74,0.12)]">
 
-  <div   [routerLink]="['/category-products', category._id]" class="relative h-[250px] bg-gray-50 flex items-center justify-center overflow-hidden rounded-t-[2rem]">
+  <div [routerLink]="['/category-products', category._id]"
+       class="relative h-[320px] lg:h-[250px] bg-gray-50 flex items-center justify-center overflow-hidden rounded-t-[2.5rem] cursor-pointer">
+
     <img
       [src]="category.image"
       alt="Category Image"
       class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
     />
+
     <div class="absolute inset-0 bg-green-50 opacity-0 group-hover:opacity-30 transition-opacity duration-500"></div>
   </div>
 
-  <div class="px-6 py-5 text-center">
+  <div class="px-6 py-7 lg:py-5 text-center">
     <span
-      class="inline-block text-xs font-bold text-green-600 uppercase tracking-widest bg-green-50
-             px-3 py-1 rounded-full transition-colors
-             group-hover:bg-green-600 group-hover:text-white">
+      class="inline-block text-sm lg:text-xs font-black text-green-600 uppercase tracking-[0.15em] bg-green-50
+             px-5 py-2 lg:px-3 lg:py-1 rounded-full transition-all duration-300
+             group-hover:bg-green-600 group-hover:text-white group-hover:scale-105">
       {{ category.name }}
     </span>
   </div>
 
-  <div class="absolute bottom-0 left-0 w-0 h-1 bg-green-600 transition-all duration-500 group-hover:w-full"></div>
+  <div class="absolute bottom-0 left-0 w-0 h-1.5 bg-green-600 transition-all duration-500 group-hover:w-full"></div>
 
 </div>
