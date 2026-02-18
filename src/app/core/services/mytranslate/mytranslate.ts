@@ -19,7 +19,7 @@ export class Mytranslate {
       }
     }
 
-    this.translateService.setFallbackLang(defaultlang);
+    this.translateService.setDefaultLang(defaultlang);
     this.translateService.use(defaultlang);
     this.changeDirection(defaultlang);
   }
@@ -29,7 +29,7 @@ export class Mytranslate {
       localStorage.setItem('lang', lang);
     }
 
-    this.translateService.setFallbackLang(lang);
+    this.translateService.setDefaultLang(lang);
     this.translateService.use(lang);
     this.changeDirection(lang);
   }
