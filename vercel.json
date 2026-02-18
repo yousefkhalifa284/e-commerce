@@ -1,0 +1,7 @@
+{
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist/e-commerce/browser",
+  "installCommand": "npm install",
+  "devCommand": "ng serve",
+  "framework": "angular"
+}
