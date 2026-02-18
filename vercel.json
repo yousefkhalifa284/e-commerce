@@ -1,6 +1,6 @@
 {
   "buildCommand": "npm run build",
-  "outputDirectory": "dist/e-commerce/browser",
+  "outputDirectory": "dist/e-commerce",
   "installCommand": "npm install --legacy-peer-deps",
   "devCommand": "ng serve",
   "framework": "angular"
