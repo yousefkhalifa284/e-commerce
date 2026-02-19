@@ -8,7 +8,7 @@ import { TranslateModule } from '@ngx-translate/core';
 @Component({
   selector: 'app-cart',
   standalone: true,
-  imports: [RouterLink,TranslateModule],
+  imports: [RouterLink, TranslateModule],
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.css',
 })
@@ -25,7 +25,6 @@ export class CartComponent implements OnInit {
     this.getUserCartData();
   }
 
-
   getUserCartData(): void {
     this.isLoading.set(true);
     this._cartService.getLoggedUserCart().subscribe({
@@ -41,7 +40,6 @@ export class CartComponent implements OnInit {
       }
     });
   }
-
 
   removeProductItemFromCart(id: string): void {
     this.isRemovingId.set(id);
@@ -63,17 +61,21 @@ export class CartComponent implements OnInit {
   updateProductCount(id: string, count: number): void {
     if (count <= 0) return;
 
+    this.isLoading.set(true);
     this._cartService.updateProductCartQuantity(id, count).subscribe({
       next: (res) => {
         if (res.status === 'success') {
           this.cardDetailsData.set(res.data);
           this._toastr.success('Quantity updated');
         }
+        this.isLoading.set(false);
       },
-      error: (err) => console.error(err)
+      error: (err) => {
+        console.error(err);
+        this.isLoading.set(false);
+      }
     });
   }
-
 
   clearUserCart(): void {
     this.isClearingCart.set(true);
