@@ -8,11 +8,11 @@
         </svg>
       </div>
       <div>
-        <h1 class="text-3xl font-black text-gray-900 tracking-tight">Shopping Cart</h1>
+        <h1 class="text-3xl font-black text-gray-900 tracking-tight">{{ 'cart.shoppingCart' | translate }}</h1>
         @if (isLoading()) {
           <div class="h-4 bg-gray-200 rounded-full w-40 mt-2 animate-pulse"></div>
         } @else if (cardDetailsData().products) {
-          <p class="text-gray-500 font-medium">You have {{ cardDetailsData().products.length }} items in your cart</p>
+          <p class="text-gray-500 font-medium">{{ 'cart.youHave' | translate }} {{ cardDetailsData().products.length }} {{ 'cart.itemsInCart' | translate }}</p>
         }
       </div>
     </div>
@@ -45,7 +45,7 @@
                   {{ item.product.category.name }}
                 </span>
                 <h3 class="text-lg font-bold text-gray-800 mt-1 line-clamp-1">{{ item.product.title }}</h3>
-                <p class="text-green-600 font-black text-xl mt-2">{{ item.price * item.count }} <small class="text-[10px]">EGP</small></p>
+                <p class="text-green-600 font-black text-xl mt-2">{{ item.price * item.count }} <small class="text-[10px]">{{ 'cart.egp' | translate }}</small></p>
               </div>
 
               <div class="flex items-center gap-4 bg-gray-50 p-2 rounded-2xl border border-gray-100">
@@ -74,8 +74,8 @@
           } @empty {
             <div class="text-center py-20 bg-white rounded-[3rem] border-2 border-dashed border-gray-200">
               <i class="fa-solid fa-cart-arrow-down text-6xl text-gray-200 mb-4"></i>
-              <h3 class="text-xl font-bold text-gray-800">Your cart is empty</h3>
-              <button routerLink="/home" class="mt-4 text-green-600 font-bold hover:underline cursor-pointer">Start Shopping</button>
+              <h3 class="text-xl font-bold text-gray-800">{{ 'cart.emptyTitle' | translate }}</h3>
+              <button routerLink="/home" class="mt-4 text-green-600 font-bold hover:underline cursor-pointer">{{ 'cart.startShopping' | translate }}</button>
             </div>
           }
         }
@@ -93,18 +93,18 @@
           </div>
         } @else {
           <div class="bg-white p-8 rounded-[2.5rem] border border-gray-100 shadow-xl shadow-gray-200/50 sticky top-28">
-            <h2 class="text-xl font-black text-gray-900 mb-6">Order Summary</h2>
+            <h2 class="text-xl font-black text-gray-900 mb-6">{{ 'cart.orderSummary' | translate }}</h2>
 
             <div class="space-y-4 mb-8">
               <div class="flex justify-between text-gray-500 font-medium">
-                <span class="text-gray-900 font-bold">Total Items</span>
+                <span class="text-gray-900 font-bold">{{ 'cart.totalItems' | translate }}</span>
                 <span class="text-green-600 font-bold">{{ cardDetailsData().products?.length || 0 }}</span>
               </div>
               <div class="border-t border-gray-100 pt-4 flex justify-between items-end">
-                <span class="text-gray-900 font-bold">Total Amount</span>
+                <span class="text-gray-900 font-bold">{{ 'cart.totalAmount' | translate }}</span>
                 <div class="text-right">
                   <p class="text-3xl font-black text-green-600 leading-none">{{ cardDetailsData().totalCartPrice }}</p>
-                  <small class="text-[10px] text-gray-400 font-bold uppercase">egp</small>
+                  <small class="text-[10px] text-gray-400 font-bold uppercase">{{ 'cart.egp' | translate }}</small>
                 </div>
               </div>
             </div>
@@ -114,21 +114,21 @@
                       [disabled]="isCheckoutDisabled()"
                       class="w-full bg-green-600 disabled:bg-gray-300 disabled:cursor-not-allowed hover:bg-green-700 text-white font-bold py-4 rounded-2xl shadow-lg transition-all active:scale-95 flex items-center justify-center gap-3 group cursor-pointer">
                 <i class="fa-solid fa-credit-card text-sm"></i>
-                <span>Pay Online (Stripe)</span>
+                <span>{{ 'cart.payOnline' | translate }}</span>
               </button>
 
               <button [routerLink]="!isCheckoutDisabled() ? ['/cash', cardDetailsData()._id] : null"
                       [disabled]="isCheckoutDisabled()"
                       class="w-full bg-slate-900 disabled:bg-gray-300 disabled:cursor-not-allowed hover:bg-black text-white font-bold py-4 rounded-2xl shadow-lg transition-all active:scale-95 flex items-center justify-center gap-3 group cursor-pointer">
                 <i class="fa-solid fa-money-bill-wave text-sm text-green-400"></i>
-                <span>Cash on Delivery</span>
+                <span>{{ 'cart.cashOnDelivery' | translate }}</span>
               </button>
             </div>
 
             <div class="mt-6 flex flex-col gap-3">
               <div class="flex items-center gap-3 text-xs text-gray-400 font-medium bg-gray-50 p-3 rounded-xl border border-gray-100">
                 <i class="fa-solid fa-shield-check text-green-500 text-lg"></i>
-                Secure Checkout Guaranteed
+                {{ 'cart.secureCheckout' | translate }}
               </div>
 
               <button (click)="clearUserCart()"
@@ -136,10 +136,10 @@
                       class="w-full py-3 text-red-500 font-bold text-sm hover:bg-red-50 rounded-xl transition-colors cursor-pointer flex items-center justify-center gap-2 disabled:opacity-50">
                 @if (isClearingCart()) {
                   <i class="fa-solid fa-spinner fa-spin"></i>
-                  <span>Clearing Cart...</span>
+                  <span>{{ 'cart.clearingCart' | translate }}</span>
                 } @else {
                   <i class="fa-solid fa-trash-arrow-up"></i>
-                  <span>Clear Shopping Cart</span>
+                  <span>{{ 'cart.clearCart' | translate }}</span>
                 }
               </button>
             </div>

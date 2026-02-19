@@ -1,20 +1,18 @@
 <section class="min-h-screen bg-gradient-to-br from-green-50 via-emerald-50/30 to-white py-12">
   <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
 
-    <!-- Header Section -->
     <div class="text-center mb-12 lg:mb-20 space-y-6">
       <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black text-gray-900 tracking-tight">
-        Products in
+        {{ 'categoryProducts.productsIn' | translate }}
         <span class="relative inline-block">
           <span class="text-transparent bg-clip-text bg-gradient-to-r from-green-600 via-emerald-600 to-teal-500">
-            {{ categoryName }}
+             {{'categoryProducts.thisCategory' |translate}}
           </span>
         </span>
       </h1>
-      <p class="text-gray-600 text-lg">{{ products().length }} products available</p>
+      <p class="text-gray-600 text-lg">{{ products().length }} {{ 'categoryProducts.productsAvailable' | translate }}</p>
     </div>
 
-    <!-- Loading State -->
     @if (isLoading()) {
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
         @for (item of [1,2,3,4,5,6,7,8]; track $index) {
@@ -35,28 +33,25 @@
           <div [routerLink]="['/product-datails', product._id]"
                class="group bg-white rounded-3xl p-4 border border-gray-100 shadow-lg hover:shadow-xl transition-all duration-500 hover:-translate-y-2 cursor-pointer">
 
-            <!-- Product Image -->
             <div class="relative overflow-hidden rounded-2xl bg-gray-50 aspect-square mb-4">
               <img [src]="product.imageCover"
                    [alt]="product.title"
                    class="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-110"
                    loading="lazy">
 
-              <!-- Sale Badge -->
               @if (product.priceAfterDiscount) {
                 <span class="absolute top-3 right-3 bg-red-500 text-white text-xs font-bold px-3 py-1.5 rounded-full">
-                  SALE
+                  {{ 'categoryProducts.sale' | translate }}
                 </span>
               }
 
               <div class="absolute inset-0 bg-gradient-to-t from-green-900/80 via-green-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-end justify-center pb-6">
                 <span class="text-white text-sm font-semibold bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full">
-                  <i class="fas fa-eye mr-2"></i>View Details
+                  <i class="fas fa-eye mr-2"></i>{{ 'categoryProducts.viewDetails' | translate }}
                 </span>
               </div>
             </div>
 
-            <!-- Product Info -->
             <div class="space-y-2">
               <h3 class="font-bold text-gray-800 group-hover:text-green-600 transition-colors line-clamp-2">
                 {{ product.title }}
@@ -69,7 +64,6 @@
                 }
               </div>
 
-              <!-- Rating -->
               <div class="flex items-center gap-1">
                 @for (star of [1,2,3,4,5]; track $index) {
                   <i class="fas fa-star text-sm"
@@ -79,22 +73,21 @@
                 <span class="text-xs text-gray-500 ml-2">({{ product.ratingsQuantity }})</span>
               </div>
 
-
             </div>
           </div>
         }
       </div>
     }
 
-    <!-- Number Products State -->
+
     @if (!isLoading() && products().length === 0) {
       <div class="text-center py-20">
         <i class="fas fa-box-open text-7xl text-gray-300 mb-6"></i>
-        <h2 class="text-2xl font-bold text-gray-800">No Products Found</h2>
-        <p class="text-gray-500 mt-4">This category doesn't have any products yet.</p>
+        <h2 class="text-2xl font-bold text-gray-800">{{ 'categoryProducts.noProductsFound' | translate }}</h2>
+        <p class="text-gray-500 mt-4">{{ 'categoryProducts.noProductsMessage' | translate }}</p>
         <button routerLink="/categories"
                 class="mt-8 bg-green-600 text-white px-8 py-3 rounded-full font-semibold hover:bg-green-700 transition-colors">
-          Back to Categories
+          {{ 'categoryProducts.backToCategories' | translate }}
         </button>
       </div>
     }

@@ -6,8 +6,8 @@
       <div class="inline-flex items-center justify-center w-20 h-20 bg-white rounded-3xl mb-6 shadow-xl shadow-green-100/50 border border-green-50 animate-bounce-slow">
         <i class="fa-solid fa-user-plus text-3xl text-green-600"></i>
       </div>
-      <h1 class="text-4xl font-black text-gray-900 tracking-tight mb-2">Join FreshCart</h1>
-      <p class="text-gray-500 font-medium italic">Create an account to enjoy our platform</p>
+      <h1 class="text-4xl font-black text-gray-900 tracking-tight mb-2">{{ 'signup.joinFreshCart' | translate }}</h1>
+      <p class="text-gray-500 font-medium italic">{{ 'signup.createAccountDesc' | translate }}</p>
     </div>
 
     @if (errorMessage()) {
@@ -24,17 +24,17 @@
           'text-gray-600': !signupForm.get('name')?.touched,
           'text-red-600': signupForm.get('name')?.invalid && signupForm.get('name')?.touched,
           'text-green-600': signupForm.get('name')?.valid && signupForm.get('name')?.touched
-        }" class="block text-[11px] uppercase tracking-[0.15em] font-black mb-2 ml-2 transition-colors"> Name</label>
+        }" class="block text-[11px] uppercase tracking-[0.15em] font-black mb-2 ml-2 transition-colors">{{ 'signup.name' | translate }}</label>
 
-        <input type="text" formControlName="name" placeholder="yousef"
+        <input type="text" formControlName="name" [placeholder]="'signup.namePlaceholder' | translate"
           [class]="!signupForm.get('name')?.touched ? 'border-gray-100' : (signupForm.get('name')?.invalid ? 'border-red-200 bg-red-50/30' : 'border-green-200 bg-green-50/30')"
           class="w-full px-5 py-3.5 bg-gray-50/50 border-2 rounded-2xl outline-none transition-all duration-300 focus:bg-white focus:border-green-500 focus:ring-4 focus:ring-green-500/10 font-semibold text-gray-700">
 
         @if (signupForm.get('name')?.errors && signupForm.get('name')?.touched) {
           <p class="text-red-500 text-[10px] mt-1.5 ml-3 font-bold flex items-center">
             <i class="fa-solid fa-info-circle mr-1"></i>
-            @if (signupForm.get('name')?.errors?.['required']) { <span>Required field</span> }
-            @else if (signupForm.get('name')?.errors?.['minlength']) { <span>Min 3 characters</span> }
+            @if (signupForm.get('name')?.errors?.['required']) { <span>{{ 'signup.requiredField' | translate }}</span> }
+            @else if (signupForm.get('name')?.errors?.['minlength']) { <span>{{ 'signup.minCharacters' | translate }}</span> }
           </p>
         }
       </div>
@@ -44,16 +44,16 @@
           'text-gray-600': !signupForm.get('email')?.touched,
           'text-red-600': signupForm.get('email')?.invalid && signupForm.get('email')?.touched,
           'text-green-600': signupForm.get('email')?.valid && signupForm.get('email')?.touched
-        }" class="block text-[11px] uppercase tracking-[0.15em] font-black mb-2 ml-2 transition-colors">Email Address</label>
+        }" class="block text-[11px] uppercase tracking-[0.15em] font-black mb-2 ml-2 transition-colors">{{ 'signup.emailAddress' | translate }}</label>
 
-        <input type="email" formControlName="email" placeholder="email@example.com"
+        <input type="email" formControlName="email" [placeholder]="'signup.emailPlaceholder' | translate"
           [class]="!signupForm.get('email')?.touched ? 'border-gray-100' : (signupForm.get('email')?.invalid ? 'border-red-200 bg-red-50/30' : 'border-green-200 bg-green-50/30')"
           class="w-full px-5 py-3.5 bg-gray-50/50 border-2 rounded-2xl outline-none transition-all duration-300 focus:bg-white focus:border-green-500 focus:ring-4 focus:ring-green-500/10 font-semibold text-gray-700">
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-5">
         <div class="relative">
-          <label class="block text-[11px] uppercase tracking-[0.15em] font-black mb-2 ml-2 text-gray-600">Password</label>
+          <label class="block text-[11px] uppercase tracking-[0.15em] font-black mb-2 ml-2 text-gray-600">{{ 'signup.password' | translate }}</label>
           <div class="relative group">
             <input [type]="type() ? 'password' : 'text'" formControlName="password" placeholder="••••••••"
               [class]="!signupForm.get('password')?.touched ? 'border-gray-100' : (signupForm.get('password')?.invalid ? 'border-red-200' : 'border-green-200')"
@@ -64,7 +64,7 @@
           </div>
         </div>
         <div class="relative">
-          <label class="block text-[11px] uppercase tracking-[0.15em] font-black mb-2 ml-2 text-gray-600">Confirm</label>
+          <label class="block text-[11px] uppercase tracking-[0.15em] font-black mb-2 ml-2 text-gray-600">{{ 'signup.confirm' | translate }}</label>
           <div class="relative group">
             <input [type]="type2() ? 'password' : 'text'" formControlName="rePassword" placeholder="••••••••"
               [class]="!signupForm.get('rePassword')?.touched ? 'border-gray-100' : (signupForm.get('rePassword')?.invalid ? 'border-red-200' : 'border-green-200')"
@@ -81,9 +81,9 @@
           'text-gray-600': !signupForm.get('phone')?.touched,
           'text-red-600': signupForm.get('phone')?.invalid && signupForm.get('phone')?.touched,
           'text-green-600': signupForm.get('phone')?.valid && signupForm.get('phone')?.touched
-        }" class="block text-[11px] uppercase tracking-[0.15em] font-black mb-2 ml-2 transition-colors">Phone Number</label>
+        }" class="block text-[11px] uppercase tracking-[0.15em] font-black mb-2 ml-2 transition-colors">{{ 'signup.phoneNumber' | translate }}</label>
 
-        <input type="tel" formControlName="phone" placeholder="01XXXXXXXXX"
+        <input type="tel" formControlName="phone" [placeholder]="'signup.phonePlaceholder' | translate"
           [class]="!signupForm.get('phone')?.touched ? 'border-gray-100' : (signupForm.get('phone')?.invalid ? 'border-red-200 bg-red-50/30' : 'border-green-200 bg-green-50/30')"
           class="w-full px-5 py-3.5 bg-gray-50/50 border-2 rounded-2xl outline-none transition-all duration-300 focus:bg-white focus:border-green-500 focus:ring-4 focus:ring-green-500/10 font-semibold text-gray-700">
       </div>
@@ -92,9 +92,9 @@
         class="w-full relative group bg-green-600 hover:bg-green-700 text-white font-black py-4 rounded-2xl shadow-xl shadow-green-100 transition-all active:scale-[0.96] disabled:opacity-50 disabled:grayscale overflow-hidden">
         <div class="relative z-10 flex items-center justify-center tracking-widest uppercase">
           @if (isLoading()) {
-            <i class="fa-solid fa-circle-notch animate-spin mr-3 text-lg"></i> Processing...
+            <i class="fa-solid fa-circle-notch animate-spin mr-3 text-lg"></i> {{ 'signup.processing' | translate }}
           } @else {
-            <span>Create Account</span>
+            <span>{{ 'signup.createAccount' | translate }}</span>
             <i class="fa-solid fa-arrow-right ml-2 text-[10px] group-hover:translate-x-1 transition-transform"></i>
           }
         </div>
@@ -105,5 +105,3 @@
 
   </div>
 </div>
-
-

@@ -4,11 +4,12 @@ import { RouterLink } from '@angular/router';
 import { Cart } from '../cart/services/cart';
 import { ToastrService } from 'ngx-toastr';
 import { WishlistService } from './serivces/wishlist';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-wishlist',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink,TranslateModule],
   templateUrl: './wishlist.component.html',
   styleUrls: ['./wishlist.component.css']
 })

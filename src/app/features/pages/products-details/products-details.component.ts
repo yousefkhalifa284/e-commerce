@@ -7,11 +7,12 @@ import { WishlistService } from '../wishlist/serivces/wishlist';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { Cart } from '../cart/services/cart';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-products-details',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule,TranslateModule],
   templateUrl: './products-details.component.html',
   styleUrl: './products-details.component.css',
 })

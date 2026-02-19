@@ -6,8 +6,8 @@
       <div class="inline-flex items-center justify-center w-20 h-20 bg-white rounded-3xl mb-6 shadow-xl shadow-green-100/50 border border-green-50 animate-bounce-slow">
         <i class="fa-solid fa-cart-shopping text-3xl text-green-600"></i>
       </div>
-      <h1 class="text-4xl font-black text-gray-900 tracking-tight mb-2">Welcome Back</h1>
-      <p class="text-gray-500 font-medium">Please enter your details to sign in</p>
+      <h1 class="text-4xl font-black text-gray-900 tracking-tight mb-2">{{ 'login.welcomeBack' | translate }}</h1>
+      <p class="text-gray-500 font-medium">{{ 'login.enterDetails' | translate }}</p>
     </div>
 
     @if (errorMessage()) {
@@ -25,7 +25,7 @@
             'text-gray-600': !loginForm.get('email')?.touched,
             'text-red-600': loginForm.get('email')?.invalid && loginForm.get('email')?.touched,
             'text-green-600': loginForm.get('email')?.valid && loginForm.get('email')?.touched
-          }" class="block text-xs uppercase tracking-widest font-black mb-2 ml-2 transition-colors">Email Address</label>
+          }" class="block text-xs uppercase tracking-widest font-black mb-2 ml-2 transition-colors">{{ 'login.emailAddress' | translate }}</label>
 
           <div class="relative group">
             <span class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-green-500 transition-colors z-10">
@@ -34,14 +34,14 @@
             <input
               type="email"
               formControlName="email"
-              placeholder="name@company.com"
+              [placeholder]="'login.emailPlaceholder' | translate"
               [class]="!loginForm.get('email')?.touched ? 'border-gray-100' : (loginForm.get('email')?.invalid ? 'border-red-200 bg-red-50/30' : 'border-green-200 bg-green-50/30')"
               class="w-full pl-12 pr-4 py-4 bg-gray-50/50 border-2 rounded-2xl outline-none focus:bg-white focus:border-green-500 focus:ring-4 focus:ring-green-500/10 transition-all font-semibold text-gray-700 placeholder:text-gray-300"
             >
           </div>
           @if (loginForm.get('email')?.errors && loginForm.get('email')?.touched) {
             <p class="text-red-500 text-[11px] mt-2 ml-3 font-bold flex items-center">
-              <span class="w-1 h-1 bg-red-500 rounded-full mr-2"></span> Please enter a valid email.
+              <span class="w-1 h-1 bg-red-500 rounded-full mr-2"></span> {{ 'login.emailError' | translate }}
             </p>
           }
         </div>
@@ -52,8 +52,8 @@
               'text-gray-600': !loginForm.get('password')?.touched,
               'text-red-600': loginForm.get('password')?.invalid && loginForm.get('password')?.touched,
               'text-green-600': loginForm.get('password')?.valid && loginForm.get('password')?.touched
-            }" class="text-xs uppercase tracking-widest font-black transition-colors">Password</label>
-            <a routerLink="/forget-password" class="text-[11px] font-black text-green-600 hover:text-green-700 uppercase tracking-tighter decoration-2 underline-offset-4 hover:underline transition-all">Forgot?</a>
+            }" class="text-xs uppercase tracking-widest font-black transition-colors">{{ 'login.password' | translate }}</label>
+            <a routerLink="/forget-password" class="text-[11px] font-black text-green-600 hover:text-green-700 uppercase tracking-tighter decoration-2 underline-offset-4 hover:underline transition-all">{{ 'login.forgot' | translate }}</a>
           </div>
 
           <div class="relative group">
@@ -87,9 +87,9 @@
                 <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" fill="none"></circle>
                 <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
               </svg>
-              <span>Checking...</span>
+              <span>{{ 'login.checking' | translate }}</span>
             } @else {
-              <span class="uppercase">Sign In</span>
+              <span class="uppercase">{{ 'login.signIn' | translate }}</span>
               <i class="fa-solid fa-chevron-right ml-2 text-[10px] group-hover:translate-x-1 transition-transform"></i>
             }
           </div>
@@ -98,22 +98,21 @@
 
         <div class="flex items-center my-8">
             <div class="flex-1 border-t border-gray-100"></div>
-            <span class="px-4 text-[10px] font-black text-gray-400 uppercase tracking-[0.2em]">or</span>
+            <span class="px-4 text-[10px] font-black text-gray-400 uppercase tracking-[0.2em]">{{ 'login.or' | translate }}</span>
             <div class="flex-1 border-t border-gray-100"></div>
         </div>
 
         <p class="text-center text-sm text-gray-500 font-medium">
-          New to FreshCart?
+          {{ 'login.newToFreshCart' | translate }}
           <a routerLink="/signup" class="text-green-600 font-black hover:text-green-700 ml-1 transition-all border-b-2 border-transparent hover:border-green-600">
-            Create Account
+            {{ 'login.createAccount' | translate }}
           </a>
         </p>
       </form>
     </div>
 
     <p class="mt-10 text-center text-[10px] font-bold text-gray-400 uppercase tracking-widest">
-      &copy; 2026 FreshCart &bull; Secure Authentication
+      &copy; 2026 FreshCart &bull; {{ 'login.secureAuth' | translate }}
     </p>
   </div>
 </div>
-

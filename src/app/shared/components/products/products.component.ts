@@ -6,13 +6,14 @@ import { ProductCardComponent } from "../product-card/product-card.component";
 import { NgxPaginationModule } from 'ngx-pagination';
 import { SearchPipe } from '../../pipes/search-pipe';
 import { FormsModule } from '@angular/forms';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-products',
   standalone: true,
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.css'],
-  imports: [CommonModule, ProductCardComponent, NgxPaginationModule,SearchPipe,FormsModule],
+  imports: [CommonModule, ProductCardComponent, NgxPaginationModule,SearchPipe,FormsModule,TranslateModule],
 })
 export class ProductsComponent implements OnInit {
   private readonly _ProductsService = inject(ProductsService);

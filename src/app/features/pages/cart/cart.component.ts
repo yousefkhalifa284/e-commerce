@@ -3,22 +3,21 @@ import { Cart } from './services/cart';
 import { CartDetails } from './models/cart-details';
 import { RouterLink } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-cart',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink,TranslateModule],
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.css',
 })
 export class CartComponent implements OnInit {
-  // --- Signals ---
   cardDetailsData: WritableSignal<CartDetails> = signal<CartDetails>({} as CartDetails);
   isLoading = signal(true);
   isRemovingId = signal<string | null>(null);
   isClearingCart = signal<boolean>(false);
 
-  // --- Services ---
   private readonly _cartService = inject(Cart);
   private readonly _toastr = inject(ToastrService);
 

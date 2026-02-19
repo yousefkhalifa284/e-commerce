@@ -2,12 +2,13 @@ import { Component, OnInit, inject, signal, WritableSignal } from '@angular/core
 import { CommonModule } from '@angular/common';
 import { Brands } from './services/brands';
 import { RouterLink } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @Component({
   selector: 'app-brands',
   standalone: true,
-  imports: [CommonModule,RouterLink],
+  imports: [CommonModule,RouterLink,TranslateModule],
   templateUrl: './brands.component.html',
   styleUrl: './brands.component.css',
 })

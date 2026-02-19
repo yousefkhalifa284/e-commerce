@@ -2,11 +2,12 @@ import { Component, OnInit, inject, signal } from '@angular/core';
 import { CategoriesService } from '../../../core/services/categories/categories.service';
 import { Icategory } from '../../../shared/models/categories/icategory.interface';
 import { RouterLink } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-categories',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink,TranslateModule],
   templateUrl: './categories.component.html',
   styleUrl: './categories.component.css'
 })

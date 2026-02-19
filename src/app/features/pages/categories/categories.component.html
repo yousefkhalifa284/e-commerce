@@ -10,25 +10,23 @@
 
     <div class="text-center mb-12 lg:mb-20 space-y-6">
 
-
       <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black text-gray-900 tracking-tight">
-        Explore
+        {{ 'categories.explore' | translate }}
         <span class="relative inline-block">
           <span class="relative z-10 text-transparent bg-clip-text bg-gradient-to-r from-green-600 via-emerald-600 to-teal-500">
-            Categories
+            {{ 'categories.categories' | translate }}
           </span>
           <span class="absolute bottom-2 left-0 w-full h-3 bg-green-200/50 -rotate-1 rounded-full blur-sm"></span>
         </span>
       </h1>
 
       <p class="text-gray-600 text-lg max-w-2xl mx-auto leading-relaxed">
-        Discover our wide range of collections curated just for your needs.
-        <span class="block text-sm text-gray-400 mt-2">✨ Fresh picks updated daily</span>
+        {{ 'categories.description' | translate }}
+        <span class="block text-sm text-gray-400 mt-2">{{ 'categories.freshPicks' | translate }}</span>
       </p>
 
       <div class="flex justify-center gap-3">
         <div class="w-16 h-2 bg-gradient-to-r from-green-600 to-emerald-400 rounded-full"></div>
-
       </div>
     </div>
 
@@ -66,12 +64,11 @@
               <div class="absolute inset-0 bg-gradient-to-t from-green-950/90 via-green-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-end justify-center pb-10">
                 <div class="transform translate-y-6 group-hover:translate-y-0 transition-all duration-500 scale-110">
                   <span class="inline-flex items-center gap-3 text-white text-lg font-bold tracking-wider bg-green-600 px-8 py-3 rounded-2xl shadow-2xl">
-                    Explore Now
+                    {{ 'categories.exploreNow' | translate }}
                     <i class="fas fa-arrow-right animate-bounce-x"></i>
                   </span>
                 </div>
               </div>
-
 
             </div>
 
@@ -91,7 +88,6 @@
         </div>
     }
 
-
     @if (!isLoading() && categoriesList().length === 0) {
       <div class="relative text-center py-16 lg:py-20 bg-white/80 backdrop-blur-sm rounded-[3rem] shadow-2xl border border-white/50 max-w-3xl mx-auto overflow-hidden">
         <div class="absolute -top-20 -right-20 w-60 h-60 bg-gradient-to-br from-green-200/30 to-emerald-200/30 rounded-full blur-3xl"></div>
@@ -101,10 +97,10 @@
           <div class="inline-flex justify-center items-center w-24 h-24 bg-gradient-to-br from-green-100 to-emerald-100 rounded-full mb-6">
             <i class="fas fa-layer-group text-4xl text-green-600"></i>
           </div>
-          <h2 class="text-3xl font-bold text-gray-800 mb-3">No Categories Found</h2>
-          <p class="text-gray-500 text-lg mb-8">Check back later for new updates.</p>
+          <h2 class="text-3xl font-bold text-gray-800 mb-3">{{ 'categories.noCategoriesFound' | translate }}</h2>
+          <p class="text-gray-500 text-lg mb-8">{{ 'categories.checkBackLater' | translate }}</p>
           <button class="bg-gradient-to-r from-green-600 to-emerald-600 text-white px-8 py-3 rounded-full font-semibold shadow-lg shadow-green-600/30 hover:shadow-xl hover:shadow-green-600/40 hover:-translate-y-1 transition-all duration-300">
-            Refresh Page
+            {{ 'categories.refreshPage' | translate }}
           </button>
         </div>
       </div>

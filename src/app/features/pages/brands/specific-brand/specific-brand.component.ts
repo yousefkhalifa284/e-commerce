@@ -7,11 +7,12 @@ import { Brands } from '../services/brands';
 import { ProductsService } from '../../../../core/services/products/products';
 import { Brand } from '../../cart/models/cart-details';
 import { Ibrand } from '../../../../shared/models/brands/ibrand.interface';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-specific-brand',
   standalone: true,
-  imports: [RouterLink, CurrencyPipe],
+  imports: [RouterLink, CurrencyPipe,TranslateModule],
   templateUrl: './specific-brand.component.html',
   styleUrl: './specific-brand.component.css'
 })

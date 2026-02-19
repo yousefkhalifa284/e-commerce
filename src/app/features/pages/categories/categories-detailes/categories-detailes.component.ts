@@ -6,11 +6,12 @@ import { Iproducts } from '../../../../shared/models/products/iproducts.interfac
 import { Iresult } from '../../../../shared/models/results/iresult.interface';
 import { ProductsService } from '../../../../core/services/products/products';
 import { CategoriesService } from '../../../../core/services/categories/categories.service';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-categories-detailes',
   standalone: true,
-  imports: [RouterLink, CurrencyPipe],
+  imports: [RouterLink, CurrencyPipe,TranslateModule],
   templateUrl: './categories-detailes.component.html',
   styleUrl: './categories-detailes.component.css',
 })

@@ -26,7 +26,7 @@
         <div class="space-y-2">
           <div class="flex items-center gap-2 text-green-600 font-bold text-sm tracking-widest uppercase">
             <span class="w-8 h-[2px] bg-green-600"></span>
-            Brand: {{ product()?.brand?.name }}
+            {{ 'productDetails.brand' | translate }}: {{ product()?.brand?.name }}
           </div>
           <h1 class="text-4xl md:text-5xl font-black text-gray-900 leading-tight">
             {{ product()?.title }}
@@ -35,18 +35,18 @@
 
         <div class="flex items-center gap-6">
           <div class="flex flex-col">
-            <span class="text-sm text-gray-400 font-bold uppercase">Price</span>
+            <span class="text-sm text-gray-400 font-bold uppercase">{{ 'productDetails.price' | translate }}</span>
             <span class="text-4xl font-black text-green-600 tracking-tighter">
-              {{ product()?.price }} <small class="text-lg font-medium">EGP</small>
+              {{ product()?.price }} <small class="text-lg font-medium">{{ 'productDetails.egp' | translate }}</small>
             </span>
           </div>
           <div class="h-12 w-[2px] bg-gray-100"></div>
           <div class="flex flex-col">
-            <span class="text-sm text-gray-400 font-bold uppercase">Rating</span>
+            <span class="text-sm text-gray-400 font-bold uppercase">{{ 'productDetails.rating' | translate }}</span>
             <div class="flex items-center gap-2">
               <i class="fas fa-star text-yellow-400"></i>
               <span class="text-xl font-black text-gray-800">{{ product()?.ratingsAverage }}</span>
-              <span class="text-gray-400 text-sm">({{ product()?.ratingsQuantity }} reviews)</span>
+              <span class="text-gray-400 text-sm">({{ product()?.ratingsQuantity }} {{ 'productDetails.reviews' | translate }})</span>
             </div>
           </div>
         </div>
@@ -63,56 +63,54 @@
 
             @if (isLoadingCart()) {
               <i class="fas fa-circle-notch fa-spin text-2xl"></i>
-              <span>Processing...</span>
+              <span>{{ 'productDetails.processing' | translate }}</span>
             } @else {
               <svg class="w-6 h-6 group-hover:rotate-12 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
               </svg>
-              <span>Add to Shopping Cart</span>
+              <span>{{ 'productDetails.addToCart' | translate }}</span>
             }
           </button>
 
-        <button
-  (click)="toggleWishlist(product()?.id)"
-  [disabled]="isLoadingWishlist()"
-  class="flex-1 p-5 rounded-2xl border border-gray-100 transition-all active:scale-90 shadow-sm duration-300 flex items-center justify-center group disabled:opacity-70"
-  [class.bg-red-50]="isInWishlist(product()?.id)"
-  [class.text-red-500]="isInWishlist(product()?.id)"
-  [class.bg-gray-50]="!isInWishlist(product()?.id)"
-  [class.text-gray-400]="!isInWishlist(product()?.id)"
->
-  @if (isLoadingWishlist()) {
-    <i class="fas fa-circle-notch fa-spin text-2xl"></i>
-  } @else {
-    <svg
-      class="w-7 h-7 transition-all duration-300 group-hover:scale-110"
-      [attr.fill]="isInWishlist(product()?.id) ? 'currentColor' : 'none'"
-      stroke="currentColor"
-      viewBox="0 0 24 24"
-    >
-      <path
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        stroke-width="2"
-        d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z">
-      </path>
-    </svg>
-  }
-</button>
+          <button
+            (click)="toggleWishlist(product()?.id)"
+            [disabled]="isLoadingWishlist()"
+            class="flex-1 p-5 rounded-2xl border border-gray-100 transition-all active:scale-90 shadow-sm duration-300 flex items-center justify-center group disabled:opacity-70"
+            [class.bg-red-50]="isInWishlist(product()?.id)"
+            [class.text-red-500]="isInWishlist(product()?.id)"
+            [class.bg-gray-50]="!isInWishlist(product()?.id)"
+            [class.text-gray-400]="!isInWishlist(product()?.id)">
+            @if (isLoadingWishlist()) {
+              <i class="fas fa-circle-notch fa-spin text-2xl"></i>
+            } @else {
+              <svg
+                class="w-7 h-7 transition-all duration-300 group-hover:scale-110"
+                [attr.fill]="isInWishlist(product()?.id) ? 'currentColor' : 'none'"
+                stroke="currentColor"
+                viewBox="0 0 24 24">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z">
+                </path>
+              </svg>
+            }
+          </button>
         </div>
 
         <div class="grid grid-cols-3 gap-4 pt-8 border-t border-gray-100">
           <div class="text-center space-y-1">
              <i class="fas fa-truck text-gray-400 text-xl"></i>
-             <p class="text-[10px] font-bold text-gray-500 uppercase">Fast Delivery</p>
+             <p class="text-[10px] font-bold text-gray-500 uppercase">{{ 'productDetails.fastDelivery' | translate }}</p>
           </div>
           <div class="text-center space-y-1">
              <i class="fas fa-undo text-gray-400 text-xl"></i>
-             <p class="text-[10px] font-bold text-gray-500 uppercase">7 Days Return</p>
+             <p class="text-[10px] font-bold text-gray-500 uppercase">{{ 'productDetails.daysReturn' | translate }}</p>
           </div>
           <div class="text-center space-y-1">
              <i class="fas fa-shield-alt text-gray-400 text-xl"></i>
-             <p class="text-[10px] font-bold text-gray-500 uppercase">Secure Payment</p>
+             <p class="text-[10px] font-bold text-gray-500 uppercase">{{ 'productDetails.securePayment' | translate }}</p>
           </div>
         </div>
       </div>

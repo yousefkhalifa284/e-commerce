@@ -17,21 +17,21 @@
       <div class="text-center md:text-left space-y-4">
         <h1 class="text-4xl md:text-6xl font-black text-gray-900 tracking-tighter">
           {{ brand()?.name }}
-          <span class="text-green-600 text-2xl md:text-3xl block md:inline md:ml-2">Collection</span>
+          <span class="text-green-600 text-2xl md:text-3xl block md:inline md:ml-2">{{ 'brandDetails.collection' | translate }}</span>
         </h1>
         <div class="flex items-center justify-center md:justify-start gap-4">
           <span class="px-5 py-2 bg-green-600 text-white rounded-full text-sm font-bold shadow-lg shadow-green-600/30">
-            {{ products().length }} Products Available
+            {{ products().length }} {{ 'brandDetails.productsAvailable' | translate }}
           </span>
           <div class="h-8 w-px bg-gray-200"></div>
-          <p class="text-gray-500 font-medium italic">Premium Quality Guaranteed</p>
+          <p class="text-gray-500 font-medium italic">{{ 'brandDetails.premiumQuality' | translate }}</p>
         </div>
       </div>
     </div>
 
     <div class="mb-12">
       <div class="flex items-center gap-4 mb-10">
-        <h2 class="text-2xl font-black text-gray-800 uppercase tracking-widest italic">Featured Items</h2>
+        <h2 class="text-2xl font-black text-gray-800 uppercase tracking-widest italic">{{ 'brandDetails.featuredItems' | translate }}</h2>
         <div class="h-1 flex-1 bg-gradient-to-r from-gray-100 via-gray-100 to-transparent rounded-full"></div>
       </div>
 
@@ -63,13 +63,13 @@
 
                 <div class="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
                    <div class="bg-white/90 backdrop-blur-md px-6 py-3 rounded-2xl shadow-2xl transform translate-y-10 group-hover:translate-y-0 transition-all duration-500">
-                      <span class="text-green-600 font-black text-sm uppercase tracking-widest">Quick View</span>
+                      <span class="text-green-600 font-black text-sm uppercase tracking-widest">{{ 'brandDetails.quickView' | translate }}</span>
                    </div>
                 </div>
 
                 @if (product.priceAfterDiscount) {
                   <div class="absolute top-4 left-4 bg-red-500 text-white text-[10px] font-black px-4 py-1.5 rounded-full shadow-lg shadow-red-500/40">
-                    SALE -{{ ((product.price - product.priceAfterDiscount) / product.price * 100).toFixed(0) }}%
+                    {{ 'brandDetails.sale' | translate }} -{{ ((product.price - product.priceAfterDiscount) / product.price * 100).toFixed(0) }}%
                   </div>
                 }
               </div>
@@ -79,7 +79,7 @@
                   <h3 class="font-black text-gray-800 text-lg group-hover:text-green-600 transition-colors line-clamp-1">
                     {{ product.title }}
                   </h3>
-                  <p class="text-gray-400 text-xs font-bold uppercase tracking-widest">{{ brand()?.name }} Official</p>
+                  <p class="text-gray-400 text-xs font-bold uppercase tracking-widest">{{ brand()?.name }} {{ 'brandDetails.official' | translate }}</p>
                 </div>
 
                 <div class="flex items-center justify-between">
@@ -114,12 +114,11 @@
           <div class="w-32 h-32 bg-gray-50 rounded-full flex items-center justify-center mx-auto mb-8 shadow-inner">
             <i class="fas fa-shopping-bag text-5xl text-gray-200"></i>
           </div>
-          <h3 class="text-3xl font-black text-gray-800 mb-4 tracking-tighter">THE COLLECTION IS EMPTY</h3>
-          <p class="text-gray-500 font-medium mb-10 max-w-sm mx-auto leading-relaxed">We are currently updating the catalog. New items arriving soon!</p>
+          <h3 class="text-3xl font-black text-gray-800 mb-4 tracking-tighter">{{ 'brandDetails.theCollectionIsEmpty' | translate }}</h3>
           <button routerLink="/brand"
                   class="group bg-gray-900 text-white px-10 py-4 rounded-2xl font-black hover:bg-green-600 transition-all duration-300 shadow-xl hover:shadow-green-600/30 active:scale-95 flex items-center gap-3 mx-auto">
             <i class="fas fa-arrow-left group-hover:-translate-x-1 transition-transform"></i>
-            BACK TO BRANDS
+            {{ 'brandDetails.backToBrands' | translate }}
           </button>
         </div>
       }

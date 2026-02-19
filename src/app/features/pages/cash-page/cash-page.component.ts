@@ -2,11 +2,12 @@ import { Component, inject, signal } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Cart } from '../cart/services/cart';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-cash',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule,TranslateModule],
   templateUrl: './cash-page.component.html'
 })
 export class CashComponent {
@@ -25,7 +26,6 @@ export class CashComponent {
   });
 
   ngOnInit(): void {
-    // استلام الـ Cart ID من الرابط
     this.route.paramMap.subscribe(params => {
       this.cartId = params.get('id') || '';
     });
@@ -37,7 +37,6 @@ export class CashComponent {
       this.cartService.createCashOrder(this.cartId, this.shippingForm.value).subscribe({
         next: (res) => {
           this.isLoading.set(false);
-          // بعد نجاح الطلب، نصفر العداد ونوجه المستخدم لصفحة الطلبات أو الرئيسية
           this.cartService.cartCount.set(0);
           alert('Order Created Successfully!');
           this.router.navigate(['/home']);
