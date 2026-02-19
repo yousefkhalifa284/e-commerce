@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, inject } from '@angular/core';
+import { Component, Input, OnInit, inject, signal } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { Cart } from '../../../features/pages/cart/services/cart';
 import { Mytranslate } from '../../../core/services/mytranslate/mytranslate';
@@ -30,7 +30,7 @@ export class NavbarComponent implements OnInit {
     { text: 'nav.categories', link: '/categories' },
     { text: 'nav.brand', link: '/brand' }
   ];
-
+isLangMenuOpen = signal(false);
   ngOnInit(): void {
     if (this.isUser) {
       this.cartService.getLoggedUserCart().subscribe();
