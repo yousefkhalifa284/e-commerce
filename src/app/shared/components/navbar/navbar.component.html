@@ -2,7 +2,7 @@
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex items-center justify-between h-24 lg:h-20">
 
-      <a routerLink="/" class="flex items-center gap-3 group">
+      <a class="flex items-center gap-3 group">
         <div class="relative">
           <div class="absolute -inset-1 bg-linear-to-r from-green-600 to-emerald-400 rounded-lg blur opacity-25 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
           <div class="relative bg-green-600 p-2.5 lg:p-2 rounded-xl lg:rounded-lg transform group-hover:scale-110 transition-transform duration-300 shadow-lg">
@@ -31,18 +31,18 @@
         }
       </div>
 
-      <div class="flex items-center gap-4 lg:gap-3">
-        <div class="flex items-center gap-2">
+      <div class=" flex items-center gap-2 lg:gap-3">
+        <div class=" hidden lg:flex flex items-center">
           @if (isUser) {
             <a routerLink="/cart"
-               class="relative p-3 lg:p-2.5 text-gray-500 hover:text-green-600 hover:bg-green-50 rounded-full transition">
-              <svg class="w-7 h-7 lg:w-6 lg:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+               class="relative p-2.5 lg:p-2.5 text-gray-500 hover:text-green-600 hover:bg-green-50 rounded-full transition">
+              <svg class="w-6 h-6 lg:w-6 lg:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                   d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
               </svg>
               @if (cartCount() > 0) {
                 <span
-                  class="absolute top-0 right-0 bg-green-600 text-white text-[11px] lg:text-[10px] font-bold h-6 w-6 lg:h-5 lg:w-5 flex items-center justify-center rounded-full border-2 border-white">
+                  class="absolute -top-1 -right-1 bg-green-600 text-white text-[10px] font-bold h-5 w-5 flex items-center justify-center rounded-full border-2 border-white">
                   {{ cartCount() }}
                 </span>
               }
@@ -50,39 +50,37 @@
           }
         </div>
 
-        <div class="flex items-center gap-1 ml-2 border-l border-gray-200 pl-4">
+        <div class="flex items-center gap-1 border-l border-gray-200 pl-2 lg:pl-4">
           <button (click)="switchLanguage('en')"
-                  class="px-3 py-1.5 text-sm font-bold rounded-lg transition-all duration-300
+                  class="px-2 lg:px-3 py-1.5 text-xs lg:text-sm font-bold rounded-lg transition-all duration-300
                   {{ currentLang === 'en' ? 'bg-green-600 text-white shadow-md' : 'text-gray-600 hover:text-green-600 hover:bg-gray-100' }}">
             EN
           </button>
-          <span class="text-gray-300">|</span>
+          <span class="text-gray-300 text-xs">|</span>
           <button (click)="switchLanguage('ar')"
-                  class="px-3 py-1.5 text-sm font-bold rounded-lg transition-all duration-300
+                  class="px-2 lg:px-3 py-1.5 text-xs lg:text-sm font-bold rounded-lg transition-all duration-300
                   {{ currentLang === 'ar' ? 'bg-green-600 text-white shadow-md' : 'text-gray-600 hover:text-green-600 hover:bg-gray-100' }}">
             AR
           </button>
         </div>
 
-        <div class="hidden sm:flex items-center gap-3 ml-2 border-l border-gray-200 pl-4">
+        <div class="flex items-center gap-2 lg:gap-3">
           @if (!isUser) {
-            <a routerLink="/login" class="text-sm font-bold text-gray-700 hover:text-green-600 transition">{{ 'nav.logIn' | translate }}</a>
-            <a routerLink="/signup" class="relative inline-flex items-center justify-center px-6 py-2.5 overflow-hidden font-bold text-white transition-all duration-300 bg-green-600 rounded-xl hover:bg-green-700 shadow-[0_10px_20px_-10px_rgba(22,163,74,0.5)]">
+            <a routerLink="/login"
+               class="text-sm font-bold text-gray-700 hover:text-green-600 transition whitespace-nowrap hidden sm:block lg:block">
+              {{ 'nav.logIn' | translate }}
+            </a>
+            <a routerLink="/signup"
+               class="relative inline-flex items-center justify-center px-4 py-2 overflow-hidden font-bold text-white transition-all duration-300 bg-green-600 rounded-xl hover:bg-green-700 shadow-[0_10px_20px_-10px_rgba(22,163,74,0.5)] text-xs lg:text-sm">
               {{ 'nav.signUp' | translate }}
             </a>
           }
-          @if (isUser) {
-            <button class="flex items-center gap-1 px-3 py-2 text-sm font-bold text-red-500 hover:bg-red-50 rounded-lg transition-all group" (click)="signOut()">
-              {{ 'nav.logout' | translate }}
-              <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
-              </svg>
-            </button>
-          }
+
         </div>
 
-        <button (click)="toggleMobileMenu()" type="button" class="lg:hidden p-3 rounded-2xl bg-gray-50 text-gray-600 hover:bg-gray-100 transition-colors">
-          <svg class="w-7 h-7 lg:w-6 lg:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+
+        <button (click)="toggleMobileMenu()" type="button" class="lg:hidden p-2 rounded-2xl bg-gray-50 text-gray-600 hover:bg-gray-100 transition-colors ml-1">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
           </svg>
         </button>
@@ -93,35 +91,46 @@
   <div id="mobile-navbar-menu"
        [class.hidden]="!isMobileMenuOpen"
        class="lg:hidden bg-white/95 backdrop-blur-xl border-t border-gray-100 shadow-2xl overflow-hidden">
-    <div class="px-6 py-10 space-y-6">
-      @if (isUser) {
-        @for (page of pages; track $index) {
-          <a routerLink="/{{page.link}}"
-             class="block text-2xl font-bold text-gray-800 hover:text-green-600 transition"
-             (click)="isMobileMenuOpen = false">
-            {{ page.text | translate }}
-          </a>
-        }
-      }
-
-      <div class="pt-8 border-t border-gray-100 grid grid-cols-2 gap-4">
+    <div class="px-6 py-6 space-y-4">
+      <div class="flex items-center justify-between border-b border-gray-100 pb-4">
         @if (!isUser) {
-          <a routerLink="/login"
-             class="py-5 rounded-2xl text-center font-bold text-lg text-gray-700 bg-gray-50"
-             (click)="isMobileMenuOpen = false">
-            {{ 'nav.logIn' | translate }}
-          </a>
-          <a routerLink="/signup"
-             class="py-5 rounded-2xl text-center font-bold text-lg text-white bg-green-600 shadow-lg shadow-green-200"
-             (click)="isMobileMenuOpen = false">
-            {{ 'nav.signUp' | translate }}
-          </a>
+          <div class="flex gap-3 w-full">
+            <a routerLink="/login"
+               class="flex-1 py-3 rounded-xl text-center font-bold text-gray-700 bg-gray-50 hover:bg-gray-100 transition"
+               (click)="isMobileMenuOpen = false">
+              {{ 'nav.logIn' | translate }}
+            </a>
+            <a routerLink="/signup"
+               class="flex-1 py-3 rounded-xl text-center font-bold text-white bg-green-600 hover:bg-green-700 transition shadow-lg"
+               (click)="isMobileMenuOpen = false">
+              {{ 'nav.signUp' | translate }}
+            </a>
+          </div>
         } @else {
-          <button class="col-span-2 py-5 rounded-2xl text-center font-bold text-xl text-red-500 bg-red-50 cursor-pointer"
+
+        }
+      </div>
+
+      @if (isUser) {
+        <div class="space-y-3">
+          @for (page of pages; track $index) {
+            <a routerLink="/{{page.link}}"
+               class="block py-3 px-4 rounded-xl text-lg font-bold text-gray-800 hover:text-green-600 hover:bg-green-50 transition"
+               (click)="isMobileMenuOpen = false">
+              {{ page.text | translate }}
+            </a>
+          }
+          <button class="w-full py-3 rounded-xl text-center font-bold text-red-500 bg-red-50 hover:bg-red-100 transition"
                   (click)="signOut(); isMobileMenuOpen = false">
             {{ 'nav.signOut' | translate }}
           </button>
-        }
+        </div>
+      }
+
+      <div class="pt-4 border-t border-gray-100">
+        <p class="text-xs text-gray-400 text-center">
+          {{ 'nav.onlineMarket' | translate }} &copy; 2026
+        </p>
       </div>
     </div>
   </div>
