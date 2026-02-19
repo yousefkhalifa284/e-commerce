@@ -158,7 +158,7 @@
   "welcomeBack": "مرحباً بعودتك",
   "enterDetails": "الرجاء إدخال بياناتك لتسجيل الدخول",
   "emailAddress": "البريد الإلكتروني",
-  "emailPlaceholder": "الاسم@company.com",
+  "emailPlaceholder": "الاسم@example.com",
   "emailError": "الرجاء إدخال بريد إلكتروني صحيح.",
   "password": "كلمة المرور",
   "forgot": "نسيت كلمة المرور؟",

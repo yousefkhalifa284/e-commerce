@@ -158,7 +158,7 @@
   "welcomeBack": "Welcome Back",
   "enterDetails": "Please enter your details to sign in",
   "emailAddress": "Email Address",
-  "emailPlaceholder": "name@company.com",
+  "emailPlaceholder": "name@example.com",
   "emailError": "Please enter a valid email.",
   "password": "Password",
   "forgot": "Forgot?",
