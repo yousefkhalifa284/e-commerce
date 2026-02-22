@@ -58,9 +58,9 @@
               </h3>
 
               <div class="flex items-center gap-2">
-                <span class="text-green-600 font-black text-xl">{{ product.price | currency:'EGP ' }}</span>
+                <span class="text-green-600 font-black text-xl">{{ product.priceAfterDiscount | currency:'EGP ' }}</span>
                 @if (product.priceAfterDiscount) {
-                  <span class="text-gray-400 line-through text-sm">{{ product.priceAfterDiscount | currency:'EGP ' }}</span>
+                  <span class="text-gray-400 line-through text-sm">{{ product.price | currency:'EGP ' }}</span>
                 }
               </div>
 
